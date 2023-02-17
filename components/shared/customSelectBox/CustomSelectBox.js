@@ -17,6 +17,7 @@ const Select = styled.div`
   p{
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
   }
   * {
     cursor: pointer;
@@ -77,6 +78,7 @@ const Select = styled.div`
     min-height: 40px;
     overflow: hidden;
     white-space: nowrap;
+    text-overflow: ellipsis;
 
     &:hover{
         background-color: #f4f4f4;
