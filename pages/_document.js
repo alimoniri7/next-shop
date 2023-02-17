@@ -6,11 +6,11 @@ import createEmotionCache from "../utils/createEmotionCache";
 export default class MyDocument extends Document {
  render() {
    return (
-     <Html lang="en">
+     <Html dir="rtl" lang="en">
        <Head>
          {this.props.emotionStyleTags}
        </Head>
-       <body>
+       <body style={{backgroundColor: '#e7eee7'}} >
          <Main />
          <NextScript />
        </body>
