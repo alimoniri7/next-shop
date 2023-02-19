@@ -144,7 +144,7 @@ const Signup = () => {
                 <Button onClick={handleOpenCountAndColorPicker} >+</Button>
                 <Box maxWidth='200px' display='flex' gap={1} flexWrap='wrap'>
                   {
-                    formik.values.countAndColors.map(item=> <CountAndColorTag color={item.color} count={item.count} />)
+                    formik.values.countAndColors.map(item=> <CountAndColorTag color={item.color} count={item.count} name='countAndColors' setValues={formik.setFieldValue} countAndColors={formik.values.countAndColors} />)
                   }
                 </Box>
                 <CountAndColorPicker setValues={formik.setFieldValue}  countAndColors={formik.values.countAndColors} setOpen={setOpenCountAndColorPicker} open={openCountAndColorPicker} name="countAndColors"/>
