@@ -36,5 +36,18 @@ export const theme = createTheme({
     main: "#b4f8c8"
    }
  },
- direction: "rtl"
+ direction: "rtl",
+//  components: {
+//   MuiButton: {
+//     styleOverrides: {
+//       root:{
+//         color: '#fff',
+//         backgroundColor: '#0a3543'
+        
+//       }
+      
+//       // variant: 'outlined'
+//     }
+//   }
+//  }
 });

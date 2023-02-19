@@ -15,12 +15,13 @@ import CustomSelectBox from "@/components/shared/customSelectBox/CustomSelectBox
 import BubbleBackground from "@/components/shared/animatedBackgrounds/bubble/BubbleBackground";
 import CountAndColorPicker from "@/components/shared/CountAndColorPicker";
 import CountAndColorTag from "@/components/shared/CountAndColorTag";
+import DarkBlueBtn from "@/components/shared/buttons/darkBlueBtn";
 
 const Signup = () => {
-  const [openCountAndColorPicker , setOpenCountAndColorPicker] = useState(false)
-  const handleOpenCountAndColorPicker = ()=>{
-    setOpenCountAndColorPicker(true)
-  }
+  const [openCountAndColorPicker, setOpenCountAndColorPicker] = useState(false);
+  const handleOpenCountAndColorPicker = () => {
+    setOpenCountAndColorPicker(true);
+  };
   const category = [
     "محصولات دیجیتال",
     "خودرو، ابزار و تجهیزات صنعتی یمنبت منتن تمنت منبت ",
@@ -40,7 +41,7 @@ const Signup = () => {
       title: "",
       category: "",
       supplyStatus: "",
-      countAndColors: []
+      countAndColors: [],
     },
     onSubmit: async (values) => {
       const response = await fetch("/api/sellers", {
@@ -132,23 +133,37 @@ const Signup = () => {
                   width="120px"
                 />
               </Box>
-              <Box>
-                <Typography
-                  variant="label"
-                  component="label"
-                  whiteSpace="nowrap"
-                  width="150px"
-                >
-                  رنگ ها:
-                </Typography>
-                <Button onClick={handleOpenCountAndColorPicker} >+</Button>
-                <Box maxWidth='200px' display='flex' gap={1} flexWrap='wrap'>
-                  {
-                    formik.values.countAndColors.map(item=> <CountAndColorTag color={item.color} count={item.count} name='countAndColors' setValues={formik.setFieldValue} countAndColors={formik.values.countAndColors} />)
-                  }
+              {formik.values.supplyStatus === "موجود" && (
+                <Box>
+                  <Typography
+                    variant="label"
+                    component="label"
+                    whiteSpace="nowrap"
+                    width="150px"
+                  >
+                    رنگ و تعداد:
+                  </Typography>
+                  <Button onClick={handleOpenCountAndColorPicker}>+</Button>
+                  <Box maxWidth="200px" display="flex" gap={1} flexWrap="wrap">
+                    {formik.values.countAndColors.map((item) => (
+                      <CountAndColorTag
+                        color={item.color}
+                        count={item.count}
+                        name="countAndColors"
+                        setValues={formik.setFieldValue}
+                        countAndColors={formik.values.countAndColors}
+                      />
+                    ))}
+                  </Box>
+                  <CountAndColorPicker
+                    setValues={formik.setFieldValue}
+                    countAndColors={formik.values.countAndColors}
+                    setOpen={setOpenCountAndColorPicker}
+                    open={openCountAndColorPicker}
+                    name="countAndColors"
+                  />
                 </Box>
-                <CountAndColorPicker setValues={formik.setFieldValue}  countAndColors={formik.values.countAndColors} setOpen={setOpenCountAndColorPicker} open={openCountAndColorPicker} name="countAndColors"/>
-              </Box>
+              )}
             </Box>
 
             <div>
@@ -182,7 +197,7 @@ const Signup = () => {
               />
             </div>
             <SendImage />
-            <Button type="submit">Submit</Button>
+            <DarkBlueBtn disabled type="submit" >Submit</DarkBlueBtn>
           </Box>
         </form>
       </Box>
