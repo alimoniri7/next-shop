@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import SendImage from "@/components/shared/sendImage";
 
@@ -20,9 +20,12 @@ import DarkBlueBtn from "@/components/shared/buttons/darkBlueBtn";
 import GreenBtn from "@/components/shared/buttons/GreenBtn";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import UploadAvatar from "@/components/shared/UploadImage";
 
 const Signup = () => {
   const [openCountAndColorPicker, setOpenCountAndColorPicker] = useState(false);
+  const [uploadedImages, setUploadedImages] = useState([])
+  console.log(uploadedImages);
   const handleOpenCountAndColorPicker = () => {
     setOpenCountAndColorPicker(true);
   };
@@ -46,6 +49,7 @@ const Signup = () => {
       category: "",
       supplyStatus: "",
       countAndColors: [],
+      imagesData: []
     },
     onSubmit: async (values) => {
       const response = await fetch("/api/sellers", {
@@ -59,6 +63,22 @@ const Signup = () => {
   });
 
   console.log(formik.values);
+
+  // handle display countAndColorPicker
+  useEffect(() => {
+    if (
+      formik.values.supplyStatus === "ناموجود" ||
+      formik.values.supplyStatus === "به زودی"
+    ) {
+      formik.setFieldValue("countAndColors", []);
+    }
+  }, [formik.values.supplyStatus]);
+
+  // set uploaded file data to formik state (imagesData)
+  useEffect(()=>{
+    if(uploadedImages.length!==0) formik.setFieldValue('imagesData', uploadedImages)
+  }, [uploadedImages])
+
 
   return (
     <Box>
@@ -104,7 +124,7 @@ const Signup = () => {
               />
             </Box>
 
-            <Box display="flex" alignItems='flex-start' gap={10}>
+            <Box display="flex" alignItems="flex-start" gap={10}>
               <Box display="flex" alignItems="center">
                 <Typography
                   variant="label"
@@ -139,7 +159,7 @@ const Signup = () => {
               </Box>
               {formik.values.supplyStatus === "موجود" && (
                 <Box display="flex" flexDirection="column" gap={2}>
-                  <Box display="flex" gap={2} alignItems='center'>
+                  <Box display="flex" gap={2} alignItems="center">
                     <Typography
                       variant="label"
                       component="label"
@@ -182,39 +202,23 @@ const Signup = () => {
               )}
             </Box>
 
-            <div>
-              <label htmlFor="email">ایمیل</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">نام فروشگاه</label>
-              <input
-                id="shopName"
-                name="shopName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.shopName}
-              />
-            </div>
-            <div>
-              <label htmlFor="email">آدرس فروشگاه</label>
-              <input
-                id="shopAddress"
-                name="shopAddress"
-                type="textaria"
-                onChange={formik.handleChange}
-                value={formik.values.shopAddress}
-              />
-            </div>
-            <SendImage />
+
+
+            <UploadAvatar onUploadDone={setUploadedImages} />
             <DarkBlueBtn type="submit">Submit</DarkBlueBtn>
+
+
+
+
+            {
+              formik.values.imagesData.length!==0 && formik.values.imagesData.map(image=> <img key={image.url} src={image.url}/>)
+            }
+
+
           </Box>
+
+
+
         </form>
       </Box>
       <BubbleBackground />
