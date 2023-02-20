@@ -52,7 +52,7 @@ const CountAndColorTag = ({ count, color, countAndColors, name, setValues }) => 
       border="2px solid #e5e5e5"
       overflow="hidden"
     >
-      <Button onClick={handleOpen} sx={{display: 'flex', flexDirection: 'column', padding: '0', color: 'inherit', width: '100%', minWidth: '0px'}}  >
+      <Button onClick={handleOpen} sx={{display: 'flex', flexDirection: 'column', padding: '0', color: 'inherit', width: '100%', minWidth: '0px' , "&:hover":{opacity: .8}}}  >
         <Box width="100%" height="30px" bgcolor={color}></Box>
         <Box
           bgcolor="#bdbdbd"

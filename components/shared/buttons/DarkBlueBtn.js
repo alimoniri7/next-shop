@@ -6,6 +6,7 @@ const DarkBlueBtn = ({
   type,
   onClick,
   disabled = false,
+  variant = "contained",
   ...otherProps
 }) => {
   return (
@@ -13,11 +14,17 @@ const DarkBlueBtn = ({
       type={type}
       onClick={onClick}
       disabled={disabled}
+      variant={variant}
       sx={{
-        bgcolor: `${disabled ? "babyBlue.main" : "charcoal.main"}`,
-        
-        color: "#fff",
-        "&:hover": { bgcolor: "navyBlue.main", },
+        bgcolor: `${
+          disabled
+            ? "babyBlue.main"
+            : `${variant === "outlined" ? "#fff" : "charcoal.main"}`
+        }`,
+        border: `${variant === "outlined" ? "1px solid" : "none"}`,
+        borderColor: `${variant === "outlined" ? "charcoal.main" : "none"}`,
+        color: `${variant === "outlined" ? "charcoal.main" : "#fff"}`,
+        "&:hover": { bgcolor: `${variant==='outlined' ? 'whiteGreen.main' : "navyBlue.main"}`, borderColor: 'charcoal.main' },
       }}
       {...otherProps}
     >

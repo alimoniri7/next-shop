@@ -7,6 +7,7 @@ import {
   Box,
   Button,
   Divider,
+  IconButton,
   Input,
   TextField,
   Typography,
@@ -16,6 +17,9 @@ import BubbleBackground from "@/components/shared/animatedBackgrounds/bubble/Bub
 import CountAndColorPicker from "@/components/shared/CountAndColorPicker";
 import CountAndColorTag from "@/components/shared/CountAndColorTag";
 import DarkBlueBtn from "@/components/shared/buttons/darkBlueBtn";
+import GreenBtn from "@/components/shared/buttons/GreenBtn";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const Signup = () => {
   const [openCountAndColorPicker, setOpenCountAndColorPicker] = useState(false);
@@ -100,7 +104,7 @@ const Signup = () => {
               />
             </Box>
 
-            <Box display="flex" alignItems="center" gap={10}>
+            <Box display="flex" alignItems='flex-start' gap={10}>
               <Box display="flex" alignItems="center">
                 <Typography
                   variant="label"
@@ -134,16 +138,27 @@ const Signup = () => {
                 />
               </Box>
               {formik.values.supplyStatus === "موجود" && (
-                <Box>
-                  <Typography
-                    variant="label"
-                    component="label"
-                    whiteSpace="nowrap"
-                    width="150px"
-                  >
-                    رنگ و تعداد:
-                  </Typography>
-                  <Button onClick={handleOpenCountAndColorPicker}>+</Button>
+                <Box display="flex" flexDirection="column" gap={2}>
+                  <Box display="flex" gap={2} alignItems='center'>
+                    <Typography
+                      variant="label"
+                      component="label"
+                      whiteSpace="nowrap"
+                    >
+                      رنگ و تعداد:
+                    </Typography>
+                    <GreenBtn
+                      variant="outlined"
+                      onClick={handleOpenCountAndColorPicker}
+                      sx={{
+                        fontSize: "1.1rem",
+                        padding: "0 1rem",
+                        minWidth: 0,
+                      }}
+                    >
+                      +
+                    </GreenBtn>
+                  </Box>
                   <Box maxWidth="200px" display="flex" gap={1} flexWrap="wrap">
                     {formik.values.countAndColors.map((item) => (
                       <CountAndColorTag
@@ -161,6 +176,7 @@ const Signup = () => {
                     setOpen={setOpenCountAndColorPicker}
                     open={openCountAndColorPicker}
                     name="countAndColors"
+                    countAndColor={formik.values.countAndColors}
                   />
                 </Box>
               )}
@@ -197,7 +213,7 @@ const Signup = () => {
               />
             </div>
             <SendImage />
-            <DarkBlueBtn disabled type="submit" >Submit</DarkBlueBtn>
+            <DarkBlueBtn type="submit">Submit</DarkBlueBtn>
           </Box>
         </form>
       </Box>
