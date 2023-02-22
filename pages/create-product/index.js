@@ -21,6 +21,7 @@ import GreenBtn from "@/components/shared/buttons/GreenBtn";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import UploadAvatar from "@/components/shared/UploadImage";
+import GalleryBox from "@/components/shared/photoGallery/GalleryBox";
 
 const Signup = () => {
   const [openCountAndColorPicker, setOpenCountAndColorPicker] = useState(false);
@@ -210,9 +211,7 @@ const Signup = () => {
 
 
 
-            {
-              formik.values.imagesData.length!==0 && formik.values.imagesData.map(image=> <img key={image.url} src={image.url}/>)
-            }
+            <GalleryBox width='350px'/>
 
 
           </Box>
