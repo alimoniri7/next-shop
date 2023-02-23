@@ -80,7 +80,13 @@ const Signup = () => {
     if(uploadedImages.length!==0) formik.setFieldValue('imagesData', uploadedImages)
   }, [uploadedImages])
 
-
+  const images = [
+    "https://media.graphassets.com/ArkiwE2aRnSWsKXpUJXj",
+    "https://media.graphassets.com/OXTlrGVATbupsxS6E4mT",
+    "https://media.graphassets.com/CMzIlQU3Tr62PSg4aStg",
+    "https://media.graphassets.com/fhrUTd03STSp0hOYKs50",
+    "https://media.graphassets.com/fhrUTd03STSp0hOYKs50",
+  ];
   return (
     <Box>
       <Box
@@ -211,7 +217,7 @@ const Signup = () => {
 
 
 
-            <GalleryBox width='350px'/>
+            <GalleryBox width='350px' imageURLs={images}/>
 
 
           </Box>
