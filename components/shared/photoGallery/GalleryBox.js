@@ -103,7 +103,7 @@ const GalleryBox = ({ width, imageURLs }) => {
             images.map((image, index) => {
               if (images.length <= 4) {
                 return (
-                  <>
+                  <React.Fragment key={image}>
                     {image ? (
                       <SmallImageBox key={image}>
                         <img src={image} onClick={() => selectImage(image)} />
@@ -111,7 +111,7 @@ const GalleryBox = ({ width, imageURLs }) => {
                     ) : (
                       <span key={index}></span>
                     )}
-                  </>
+                  </React.Fragment>
                 );
               } else {
                 if (index < 3) {

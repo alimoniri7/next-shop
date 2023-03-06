@@ -192,6 +192,7 @@ const Signup = () => {
                       <CountAndColorTag
                         color={item.color}
                         count={item.count}
+                        price={item.price}
                         name="countAndColors"
                         setValues={formik.setFieldValue}
                         countAndColors={formik.values.countAndColors}

@@ -7,7 +7,8 @@ import GreenBtn from "./buttons/GreenBtn";
 
 const CountAndColorPicker = ({ onClose, setValues, open, setOpen, name, countAndColor  }) => {
   const [color, setColor] = useState("");
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState("");
+  const [price, setPrice] = useState("")
 
   const [opentPicker, setOpenPicker] = useState(false);
 
@@ -30,9 +31,10 @@ const CountAndColorPicker = ({ onClose, setValues, open, setOpen, name, countAnd
 
   // add picked color to countAndColor state in this component
   const addColor = () => {
-    newCountAndColor.push({ color, count });
+    newCountAndColor.push({ color, count, price });
     setColor("");
-    setCount(0);
+    setCount("");
+    setPrice("")
     setOpenPicker(false);
     // console.log(newCountAndColor);
   };
@@ -62,10 +64,21 @@ const CountAndColorPicker = ({ onClose, setValues, open, setOpen, name, countAnd
             fullWidth
               type="number"
               value={count}
-              onChange={(e) => setCount(e.target.value)}
+              onChange={(e) => setCount(parseInt(e.target.value))}
               hiddenLabel
               variant="filled"
               placeholder="تعداد"
+              sx={{  mb: "1rem", mx: "auto" }}
+              size="small"
+            />
+            <TextField
+            fullWidth
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(parseInt(e.target.value))}
+              hiddenLabel
+              variant="filled"
+              placeholder="قیمت"
               sx={{  mb: "1rem", mx: "auto" }}
               size="small"
             />
@@ -86,6 +99,7 @@ const CountAndColorPicker = ({ onClose, setValues, open, setOpen, name, countAnd
                   key={item.color}
                   color={item.color}
                   count={item.count}
+                  price={item.price}
                   name={name}
                   setValues={setValues}
                   countAndColors={newCountAndColor}

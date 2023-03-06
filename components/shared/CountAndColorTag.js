@@ -2,29 +2,33 @@ import { Button, Dialog, TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 
-const CountAndColorTag = ({ count, color, countAndColors, name, setValues }) => {
+const CountAndColorTag = ({ count, color,price, countAndColors, name, setValues }) => {
   const [open, setOpen] = useState(false);
   const [newCount, setNewCount] = useState(count);
+  const [newPrice, setNewPrice] = useState(price)
 
   const handleClose = () => {
     setOpen(false);
+    // setNewCount(count)
   };
 
   const handleOpen = ()=>{
     setOpen(true)
+    setNewCount(count)
+    setNewPrice(price)
   }
 
   const updateItem = ()=>{
-    if(Number(count)!==Number(newCount)){
+    if(Number(count)!== Number(newCount) || Number(price)!== Number(newPrice)){
         countAndColors.map((item, index)=>{
             if(item.color===color){
                 countAndColors.splice(index,1)
             }
         })
-        countAndColors.push({color: color, count: newCount})
+        countAndColors.push({color: color, count: newCount, price: newPrice})
         setValues(name, countAndColors)
         // console.log(countAndColors);
-        
+        // setNewCount(count)
         // setValues(name, newArr)
     }
     handleClose()
@@ -41,9 +45,13 @@ const CountAndColorTag = ({ count, color, countAndColors, name, setValues }) => 
 
   }
 
-  const changeHandler = (e) => {
+  const countHandler = (e) => {
     setNewCount(e.target.value);
   };
+
+  const priceHandler = (e)=>{
+    setNewPrice(e.target.value)
+  }
 
   return (
     <Box
@@ -71,8 +79,16 @@ const CountAndColorTag = ({ count, color, countAndColors, name, setValues }) => 
         <TextField
           type="number"
           value={newCount}
-          onChange={changeHandler}
+          onChange={countHandler}
           placeholder="تعداد"
+          size="small"
+          width="50px"
+        />
+        <TextField
+          type="number"
+          value={newPrice}
+          onChange={priceHandler}
+          placeholder="قیمت"
           size="small"
           width="50px"
         />
