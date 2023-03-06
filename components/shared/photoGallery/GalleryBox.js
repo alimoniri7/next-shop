@@ -2,25 +2,25 @@ import styled from "@emotion/styled";
 import React, { useState } from "react";
 
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import LightBox from "./LightBox";
 
 const MainBox = styled.div`
   width: ${(props) => props.width};
   height: ${(props) => `calc(125/100 * ${props.width})`};
   /* background-color: red; */
-  position: relative;
+  position: static;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  span{
+  span {
     width: calc(100% / 4.761);
-
   }
   > div {
     &:first-child {
       width: ${(props) => props.width};
       height: ${(props) => props.width};
       background: linear-gradient(120deg, #dcbbfa 0%, #d9ecfe 100%);
-
+      cursor: pointer;
       border-radius: 10px;
       overflow: hidden;
 
@@ -29,6 +29,10 @@ const MainBox = styled.div`
         height: 100%;
         object-fit: contain;
         object-position: center center;
+      }
+      &:hover {
+        opacity: 0.7;
+        border: 1px solid #e35a01;
       }
     }
     &:last-child {
@@ -73,6 +77,7 @@ const GalleryBox = ({ width, imageURLs }) => {
   });
 
   const [selectedimag, setSelectedImage] = useState(images[0]);
+  const [open, setOpen] = useState(false);
 
   const selectImage = (selectedImage) => {
     let index = images.findIndex((image) => image === selectedImage);
@@ -83,44 +88,51 @@ const GalleryBox = ({ width, imageURLs }) => {
     alert("image list opened");
   };
 
+  const openLightBox = () => {
+    setOpen(true);
+  };
+
   return (
-    <MainBox width={width}>
-      <div>
-        <img src={selectedimag} />
-      </div>
-      <div>
-        {images.length !== 0 &&
-          images.map((image, index) => {
-            if (images.length <= 4) {
-              return (
-                <>
-                  {image ? (
+    <>
+      <MainBox width={width}>
+        <div onClick={openLightBox}>
+          <img src={selectedimag} />
+        </div>
+        <div>
+          {images.length !== 0 &&
+            images.map((image, index) => {
+              if (images.length <= 4) {
+                return (
+                  <>
+                    {image ? (
+                      <SmallImageBox key={image}>
+                        <img src={image} onClick={() => selectImage(image)} />
+                      </SmallImageBox>
+                    ) : (
+                      <span key={index}></span>
+                    )}
+                  </>
+                );
+              } else {
+                if (index < 3) {
+                  return (
                     <SmallImageBox key={image}>
                       <img src={image} onClick={() => selectImage(image)} />
                     </SmallImageBox>
-                  ) : (
-                    <span></span>
-                  )}
-                </>
-              );
-            } else {
-              if (index < 3) {
-                return (
-                  <SmallImageBox key={image}>
-                    <img src={image} onClick={() => selectImage(image)} />
-                  </SmallImageBox>
-                );
-              } else if (index === 3) {
-                return (
-                  <SmallImageBox onClick={openImagesList}>
-                    <MoreHorizIcon />
-                  </SmallImageBox>
-                );
+                  );
+                } else if (index === 3) {
+                  return (
+                    <SmallImageBox key={index} onClick={openLightBox}>
+                      <MoreHorizIcon />
+                    </SmallImageBox>
+                  );
+                }
               }
-            }
-          })}
-      </div>
-    </MainBox>
+            })}
+          <LightBox open={open} defaultImage={selectedimag} setOpen={setOpen} imageURLs={imageURLs} />
+        </div>
+      </MainBox>
+    </>
   );
 };
 

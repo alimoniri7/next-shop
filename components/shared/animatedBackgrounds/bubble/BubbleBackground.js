@@ -10,7 +10,7 @@ const BubbleBackground = () => {
             <fegaussianblur
               in="SourceGraphic"
               result="blur"
-              stddeviation="10"
+              stdDeviation="10"
             ></fegaussianblur>
             <fecolormatrix
               in="blur"

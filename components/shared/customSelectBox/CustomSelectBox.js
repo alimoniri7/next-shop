@@ -35,6 +35,7 @@ const Select = styled.div`
     border-radius: 0 0 7px 7px;
     max-height: 150px;
     overflow: scroll;
+    z-index: 10000;
     /* width */
     &::-webkit-scrollbar {
       width: 6px;

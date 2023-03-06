@@ -22,6 +22,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import UploadAvatar from "@/components/shared/UploadImage";
 import GalleryBox from "@/components/shared/photoGallery/GalleryBox";
+import LightBox from "@/components/shared/photoGallery/LightBox";
 
 const Signup = () => {
   const [openCountAndColorPicker, setOpenCountAndColorPicker] = useState(false);
@@ -84,7 +85,7 @@ const Signup = () => {
     "https://media.graphassets.com/ArkiwE2aRnSWsKXpUJXj",
     "https://media.graphassets.com/OXTlrGVATbupsxS6E4mT",
     "https://media.graphassets.com/CMzIlQU3Tr62PSg4aStg",
-    "https://media.graphassets.com/fhrUTd03STSp0hOYKs50",
+    
     "https://media.graphassets.com/fhrUTd03STSp0hOYKs50",
   ];
   return (
