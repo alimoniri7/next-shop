@@ -5,6 +5,7 @@ import { theme } from "../utils/theme";
 import createEmotionCache from "../utils/createEmotionCache";
 import { CacheProvider } from "@emotion/react";
 import RtL from "@/components/Rtl";
+import Navbar from "@/components/Navbar";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -17,7 +18,9 @@ function MyApp({
     <RtL>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
+            <Navbar/>
             <Component {...pageProps} />
+          
         </ThemeProvider>
       </CacheProvider>
     </RtL>

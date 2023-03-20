@@ -2,7 +2,6 @@ import * as React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import createEmotionCache from "../utils/createEmotionCache";
-import Navbar from "@/components/Navbar";
 
 export default class MyDocument extends Document {
  render() {
@@ -12,7 +11,6 @@ export default class MyDocument extends Document {
          {this.props.emotionStyleTags}
        </Head>
        <body style={{backgroundColor: '#e7eee7'}} >
-        <Navbar/>
          <Main />
          <NextScript />
        </body>

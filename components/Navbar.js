@@ -14,14 +14,19 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import ShopIcon from "@mui/icons-material/Shop";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useState } from "react";
+import GreenBtn from "./shared/buttons/GreenBtn";
+import LoginIcon from '@mui/icons-material/Login';
+import Link from "next/link";
 
 const pages = ["محصولات", "وبلاگ", "ارتباط با ما"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-  const [avatarUrl, setAvatarUrl] = React.useState("");
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState("");
+  const [isLoggedin, setIsLoggedin] = useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,10 +44,10 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: '#1f262e'}} >
+    <AppBar position="static" sx={{ backgroundColor: "#1f262e" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ShopIcon sx={{ display: { xs: "none", md: "flex" } }} />
+          <ShopIcon sx={{ display: { xs: "none", md: "flex", color: '#fff' } }} />
           <Typography
             variant="h6"
             noWrap
@@ -54,7 +59,7 @@ function Navbar() {
               fontFamily: "title !important",
               //   fontWeight: 700,
               //   letterSpacing: ".3rem",
-              color: "inherit",
+              color: "#fff",
               textDecoration: "none",
             }}
           >
@@ -70,7 +75,7 @@ function Navbar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{color: '#fff'}} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -97,7 +102,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <ShopIcon sx={{ display: { xs: "flex", md: "none" }, ml: 1 }} />
+          <ShopIcon sx={{ display: { xs: "flex", md: "none", color: '#fff' }, ml: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -107,7 +112,7 @@ function Navbar() {
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "title !important",
-              color: "inherit",
+              color: "#fff",
               textDecoration: "none",
             }}
           >
@@ -126,7 +131,29 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            {isLoggedin ? (
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {avatarUrl ? (
+                    <Avatar alt="Remy Sharp" src={avatarUrl} />
+                  ) : (
+                    <AccountCircleIcon
+                      sx={{ color: "#fff", fontSize: "2rem" }}
+                    />
+                  )}
+                </IconButton>
+              </Tooltip>
+            ) : (
+                <Link href='/signup'>
+                                <GreenBtn variant="outlined" size='small' sx={{ color: '#fff', borderColor: '#fff'}} >
+                  <Tooltip title="ورود / ثبت نام">
+                <LoginIcon sx={{fontSize: '1.5rem'}}/>
+              </Tooltip>
+                </GreenBtn>
+                </Link>
+            )}
+
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 {avatarUrl ? (
                   <Avatar alt="Remy Sharp" src={avatarUrl} />
@@ -134,7 +161,7 @@ function Navbar() {
                   <AccountCircleIcon sx={{color: '#fff', fontSize: '2rem'}}  />
                 )}
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
             <Menu
               sx={{ mt: "45px" }}
               id="menu-appbar"

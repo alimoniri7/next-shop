@@ -17,16 +17,17 @@ const GreenBtn = ({
       disabled={disabled}
       variant={variant}
       sx={{
-        ...sx,
+        minWidth: '0',
         bgcolor: `${
           disabled
-            ? "whiteGreen.main"
-            : `${variant === "outlined" ? "#fff" : "green.main"}`
+          ? "whiteGreen.main"
+          : `${variant === "outlined" ? "transparent" : "green.main"}`
         }`,
         border: `${variant === "outlined" ? "1px solid" : "none"}`,
         borderColor: `${variant === "outlined" ? "green.main" : "none"}`,
         color: `${variant === "outlined" ? "green.main" : "#fff"}`,
         "&:hover": { bgcolor: `${variant==='outlined' ? 'whiteGreen.main' : "forestGreen.main"}`, borderColor: 'green.main' },
+        ...sx,
       }}
       {...otherProps}
     >
