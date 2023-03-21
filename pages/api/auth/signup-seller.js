@@ -34,7 +34,6 @@ const handler = async (req, res) => {
   const newSeller = await Seller.create({email, password: hashedPassword, firstName, lastName, shopName})
 
   res.status(200).json({staus: 'success', message: 'seller created!', data: newSeller})
-  console.log('hello');
 };
 
 export default handler;

@@ -1,6 +1,7 @@
 import DarkBlueBtn from "@/components/shared/buttons/darkBlueBtn";
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Signup = () => {
@@ -219,6 +220,11 @@ const Signup = () => {
           />
         </Box>
         <DarkBlueBtn onClick={signupHandler}>ثبت نام</DarkBlueBtn>
+      </Box>
+      <Box>
+        <Link href='/signin'>
+            ثبت نام کرده اید؟ ورود
+        </Link>
       </Box>
     </Box>
   );

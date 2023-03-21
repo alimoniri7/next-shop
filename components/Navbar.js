@@ -58,9 +58,10 @@ function Navbar() {
               display: { xs: "none", md: "flex" },
               fontFamily: "title !important",
               //   fontWeight: 700,
-              //   letterSpacing: ".3rem",
               color: "#fff",
               textDecoration: "none",
+              letterSpacing: ".1rem",
+              fontSize: '1.5rem'
             }}
           >
             Melo Shop
@@ -114,6 +115,8 @@ function Navbar() {
               fontFamily: "title !important",
               color: "#fff",
               textDecoration: "none",
+              letterSpacing: ".1rem",
+              fontSize: '1.5rem'
             }}
           >
             Melo Shop
