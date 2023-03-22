@@ -7,47 +7,38 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import ShopIcon from "@mui/icons-material/Shop";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useState } from "react";
-import GreenBtn from "./shared/buttons/GreenBtn";
-import LoginIcon from '@mui/icons-material/Login';
-import Link from "next/link";
+import AccountOptions from "./AccountOptions";
+
 
 const pages = ["محصولات", "وبلاگ", "ارتباط با ما"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [isLoggedin, setIsLoggedin] = useState(false);
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+
+
+
 
   return (
     <AppBar position="static" sx={{ backgroundColor: "#1f262e" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <ShopIcon sx={{ display: { xs: "none", md: "flex", color: '#fff' } }} />
+          <ShopIcon
+            sx={{ display: { xs: "none", md: "flex", color: "#fff" } }}
+          />
           <Typography
             variant="h6"
             noWrap
@@ -61,7 +52,7 @@ function Navbar() {
               color: "#fff",
               textDecoration: "none",
               letterSpacing: ".1rem",
-              fontSize: '1.5rem'
+              fontSize: "1.5rem",
             }}
           >
             Melo Shop
@@ -76,7 +67,7 @@ function Navbar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon sx={{color: '#fff'}} />
+              <MenuIcon sx={{ color: "#fff" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -103,7 +94,9 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <ShopIcon sx={{ display: { xs: "flex", md: "none", color: '#fff' }, ml: 1 }} />
+          <ShopIcon
+            sx={{ display: { xs: "flex", md: "none", color: "#fff" }, ml: 1 }}
+          />
           <Typography
             variant="h5"
             noWrap
@@ -116,7 +109,7 @@ function Navbar() {
               color: "#fff",
               textDecoration: "none",
               letterSpacing: ".1rem",
-              fontSize: '1.5rem'
+              fontSize: "1.5rem",
             }}
           >
             Melo Shop
@@ -133,61 +126,7 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            {isLoggedin ? (
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  {avatarUrl ? (
-                    <Avatar alt="Remy Sharp" src={avatarUrl} />
-                  ) : (
-                    <AccountCircleIcon
-                      sx={{ color: "#fff", fontSize: "2rem" }}
-                    />
-                  )}
-                </IconButton>
-              </Tooltip>
-            ) : (
-                <Link href='/signup'>
-                                <GreenBtn variant="outlined" size='small' sx={{ color: '#fff', borderColor: '#fff'}} >
-                  <Tooltip title="ورود / ثبت نام">
-                <LoginIcon sx={{fontSize: '1.5rem'}}/>
-              </Tooltip>
-                </GreenBtn>
-                </Link>
-            )}
-
-            {/* <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {avatarUrl ? (
-                  <Avatar alt="Remy Sharp" src={avatarUrl} />
-                ) : (
-                  <AccountCircleIcon sx={{color: '#fff', fontSize: '2rem'}}  />
-                )}
-              </IconButton>
-            </Tooltip> */}
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
+          <AccountOptions/>
         </Toolbar>
       </Container>
     </AppBar>
